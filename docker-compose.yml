@@ -1,0 +1,19 @@
+version: '2.2'
+services:
+  react:
+    container_name: dimes
+    hostname: crguerrero
+    image: node:alpine
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    environment:
+     - PORT=80
+    volumes:
+      - $PWD/../.npm/:/root/.npm
+      - $PWD/:/root/react
+    networks:
+      - net
+    ports:
+      - '80:80'
+networks:
+  net:
