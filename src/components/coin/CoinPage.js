@@ -16,7 +16,7 @@ for (let i = 0; i < 10; i++) {
     products[i] = { ...item, id: i };
 }
 
-export const Main = () => {
+export const CoinPage = () => {
     return (
         <main className='shadow-lg px-5'>
             <h2 className="text-2xl font-extrabold tracking-tight text-gray-900">Customers also purchased</h2>
@@ -24,7 +24,10 @@ export const Main = () => {
                 {
                     products.map(
                         (product) => (
-                            <div key={product.id} className="group relative">
+                            <div
+                                key={product.id}
+                                className="group relative"
+                            >
                                 <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
                                     <img
                                         src={product.imageSrc}

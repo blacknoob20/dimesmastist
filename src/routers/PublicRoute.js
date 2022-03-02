@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { Navigate, Route } from 'react-router-dom';
+// import { Navigate, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 export const PublicRoute = ({ isLoggedIn, component: Component, ...rest }) => {
 console.log(rest);
