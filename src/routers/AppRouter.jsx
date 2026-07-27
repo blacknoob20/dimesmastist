@@ -8,7 +8,7 @@ import { CoinForm } from '../components/coin/CoinForm';
 export const AppRouter = () => {
     return (
         <Router>
-            <div className="container mx-auto relative">
+            <div className="min-h-screen bg-brand-bg">
                 <Topbar />
                 <Navbar />
                 <Routes>

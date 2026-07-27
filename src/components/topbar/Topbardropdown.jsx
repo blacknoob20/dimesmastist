@@ -4,7 +4,6 @@ import { classNames } from '../../helpers/classNames';
 
 const menuButtonClasses = classNames(
     'max-w-xs',
-    'bg-gray-800',
     'rounded-full',
     'flex',
     'items-center',
@@ -12,8 +11,11 @@ const menuButtonClasses = classNames(
     'focus:outline-none',
     'focus:ring-2',
     'focus:ring-offset-2',
-    'focus:ring-offset-gray-800',
-    'focus:ring-white'
+    'focus:ring-brand-accent',
+    'ring-2',
+    'ring-brand-border',
+    'hover:ring-brand-accent',
+    'transition-all'
 );
 const menuItemsClasses = classNames(
     'origin-top-right',
@@ -24,10 +26,9 @@ const menuItemsClasses = classNames(
     'rounded-md',
     'shadow-lg',
     'py-1',
-    'bg-white',
+    'bg-brand-surface',
     'ring-1',
-    'ring-black',
-    'ring-opacity-5',
+    'ring-brand-border',
     'focus:outline-none'
 );
 
@@ -59,8 +60,8 @@ export const Topbardropdown = ({ user, userNavigation }) => {
                                     href={item.href}
                                     className={
                                         classNames(
-                                            active ? 'bg-gray-100' : '',
-                                            'block px-4 py-2 text-sm text-gray-700'
+                                            active ? 'bg-brand-surface-secondary' : '',
+                                            'block px-4 py-2 text-sm text-brand-text'
                                         )
                                     }
                                 >
