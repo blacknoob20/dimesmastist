@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const links = [
     { name: 'Catálogo', path: '/home' },
+    { name: 'Registrar', path: '/coins' },
     { name: 'Colecciones', path: '/collections' },
     { name: 'Favoritos', path: '/favorites' },
     { name: 'Acerca', path: '/about' },

@@ -1,14 +1,4 @@
-const coins = [
-  { id: 1, denomination: '1 Sucre', country: 'Ecuador', year: 1994, km: 'KM#88', condition: 'UNC', metal: 'Níquel' },
-  { id: 2, denomination: '1 Peso', country: 'México', year: 1898, km: 'KM#407', condition: 'VF', metal: 'Plata 0.720' },
-  { id: 3, denomination: '2 Euros', country: 'Alemania', year: 2002, km: 'KM#215', condition: 'XF', metal: 'Bimetálica' },
-  { id: 4, denomination: '50 Centavos', country: 'Brasil', year: 1970, km: 'KM#575', condition: 'UNC', metal: 'Acero' },
-  { id: 5, denomination: '1 Dólar', country: 'USA', year: 1921, km: 'KM#150', condition: 'F', metal: 'Plata 0.900' },
-  { id: 6, denomination: '10 Pesos', country: 'Argentina', year: 1887, km: 'KM#31', condition: 'VF', metal: 'Oro' },
-  { id: 7, denomination: '5 Soles', country: 'Perú', year: 1975, km: 'KM#265', condition: 'XF', metal: 'Cobre-Níquel' },
-  { id: 8, denomination: '1 Franco', country: 'Francia', year: 1960, km: 'KM#940', condition: 'UNC', metal: 'Níquel' },
-  { id: 9, denomination: '1 Libra', country: 'Egipto', year: 1968, km: 'KM#420', condition: 'VF', metal: 'Plata 0.680' },
-];
+import { coins } from './coinConstants'
 
 const stats = [
   { label: 'Monedas', value: '12,453' },
@@ -29,6 +19,9 @@ const conditionColor = {
   XF: 'bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300',
   VF: 'bg-amber-100 text-amber-700 dark:bg-amber-900/60 dark:text-amber-300',
   F: 'bg-stone-100 text-stone-600 dark:bg-stone-800/60 dark:text-stone-400',
+  VG: 'bg-teal-100 text-teal-700 dark:bg-teal-900/60 dark:text-teal-300',
+  G: 'bg-rose-100 text-rose-700 dark:bg-rose-900/60 dark:text-rose-300',
+  P: 'bg-zinc-200 text-zinc-700 dark:bg-zinc-700/60 dark:text-zinc-300',
 };
 
 const statsIcons = ['🪙', '🌍', '🏛', '🥇'];
