@@ -1,11 +1,26 @@
 module.exports = {
-  content: ['./src/**/*.{html,js}'],
+  darkMode: 'media',
+  content: ['./src/**/*.{html,js,jsx}', './index.html'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          bg: 'var(--color-bg)',
+          surface: 'var(--color-surface)',
+          'surface-secondary': 'var(--color-surface-secondary)',
+          border: 'var(--color-border)',
+          text: 'var(--color-text)',
+          muted: 'var(--color-text-muted)',
+          accent: 'var(--color-accent)',
+          'accent-hover': 'var(--color-accent-hover)',
+        },
+      },
+      fontFamily: {
+        display: ['Georgia', 'Cambria', 'serif'],
+      },
+    },
   },
   plugins: [
-    require('tailwindcss'),
-    require('autoprefixer'),
     require('@tailwindcss/forms'),
   ],
 }
