@@ -1,0 +1,23 @@
+/* ========================================
+   VIEW TRANSITIONS — transiciones SPA
+   ======================================== */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: fade-out 150ms ease-out;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 200ms ease-in;
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}

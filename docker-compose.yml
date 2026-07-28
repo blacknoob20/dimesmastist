@@ -15,8 +15,8 @@ services:
     networks:
       - net
     ports:
-      - '80:80'
-    command: sh -c "apk add --no-cache libc6-compat && npm install -g pnpm && pnpm config set store-dir /root/.pnpm && pnpm install && pnpm dev"
+      - '5176:5173'
+    command: sh -c "npm install -g pnpm && pnpm dev"
     healthcheck:
       test: [ "CMD", "node", "-e", "require('http').get('http://localhost:80', r => process.exit(r.statusCode === 200 ? 0 : 1))" ]
       interval: 30s
