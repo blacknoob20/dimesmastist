@@ -15,7 +15,7 @@ services:
     networks:
       - net
     ports:
-      - '5176:5173'
+      - '5176:80'
     command: sh -c "npm install -g pnpm && pnpm dev"
     healthcheck:
       test: [ "CMD", "node", "-e", "require('http').get('http://localhost:80', r => process.exit(r.statusCode === 200 ? 0 : 1))" ]
@@ -23,5 +23,26 @@ services:
       timeout: 10s
       retries: 3
       start_period: 15s
+
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.51.1-jammy
+    container_name: dimes-playwright
+    working_dir: /tests
+    volumes:
+      - ./tests:/tests
+      - ./playwright-report:/tests/playwright-report
+      - ./test-results:/tests/test-results
+    command: sh -c "npm install @playwright/test@1.51.1 && npx playwright test --config /tests/playwright/playwright.config.cjs"
+    environment:
+      - PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+      - BASE_URL=http://react:80
+    depends_on:
+      react:
+        condition: service_healthy
+    networks:
+      - net
+    profiles:
+      - test
+
 networks:
   net:
