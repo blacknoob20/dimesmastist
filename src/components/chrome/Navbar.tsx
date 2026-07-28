@@ -1,4 +1,4 @@
-import { useLocation } from 'wouter-preact'
+import { useLocation, Link } from 'wouter-preact'
 import type { NavItem } from '@/types/nav'
 import { classNames } from '@/helpers/classNames'
 
@@ -20,9 +20,9 @@ export const Navbar = () => {
           {links.map((link) => {
             const isActive = location === link.path || (link.path !== '/' && location.startsWith(link.path))
             return (
-              <a
+              <Link
                 key={link.path}
-                href={link.path}
+                to={link.path}
                 class="relative"
               >
                 <span class={classNames(
@@ -34,7 +34,7 @@ export const Navbar = () => {
                 {isActive && (
                   <span class="absolute -bottom-[1px] left-0 right-0 h-0.5 bg-brand-accent rounded-full" />
                 )}
-              </a>
+              </Link>
             )
           })}
         </div>

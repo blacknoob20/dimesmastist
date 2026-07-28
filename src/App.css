@@ -1,80 +1,86 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ========================================
    DESIGN TOKENS — estética museo/oro
-   Light: pergamino cálido con sombras refinadas
-   Dark: negro profundo con tinte cálido hacia el oro
+   Tailwind v4: tokens via @theme
    ======================================== */
 
-:root {
-  --color-bg: #FAF8F3;
-  --color-surface: #FFFFFF;
-  --color-surface-secondary: #F5F1E8;
-  --color-border: #E7E2D6;
-  --color-text: #1C1917;
-  --color-text-muted: #78716C;
-  --color-accent: #C89B3C;
-  --color-accent-hover: #D9AB46;
+@theme {
+  --color-brand-bg: #FAF8F3;
+  --color-brand-surface: #FFFFFF;
+  --color-brand-surface-secondary: #F5F1E8;
+  --color-brand-border: #E7E2D6;
+  --color-brand-text: #1C1917;
+  --color-brand-muted: #78716C;
+  --color-brand-accent: #C89B3C;
+  --color-brand-accent-hover: #D9AB46;
+
+  --font-display: "Georgia", "Cambria", "serif";
 }
 
+/* Dark mode: override tokens via prefers-color-scheme */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #09090B;
-    --color-surface: #18181B;
-    --color-surface-secondary: #1F1B16;
-    --color-border: #3F3F46;
-    --color-text: #FAFAFA;
-    --color-text-muted: #A1A1AA;
-    --color-accent: #C89B3C;
-    --color-accent-hover: #D9AB46;
+    --color-brand-bg: #09090B;
+    --color-brand-surface: #18181B;
+    --color-brand-surface-secondary: #1F1B16;
+    --color-brand-border: #3F3F46;
+    --color-brand-text: #FAFAFA;
+    --color-brand-muted: #A1A1AA;
+    --color-brand-accent: #C89B3C;
+    --color-brand-accent-hover: #D9AB46;
   }
 }
 
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
 body {
-  background-color: var(--color-bg);
+  background-color: var(--color-brand-bg);
   font-family: system-ui, -apple-system, sans-serif;
-  color: var(--color-text);
+  color: var(--color-brand-text);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* ========================================
-   UTILITIES — sombras, glow, efectos
+   CUSTOM UTILITIES — sombras, glow, efectos
    ======================================== */
 
-@layer utilities {
-  /* Glow clásico (coin hover) */
-  .coin-glow {
-    background: radial-gradient(circle at center, rgba(200, 155, 60, 0.15) 0%, transparent 70%);
-  }
-  .coin-glow-strong {
-    background: radial-gradient(circle at center, rgba(200, 155, 60, 0.25) 0%, transparent 70%);
-  }
+@utility coin-glow {
+  background: radial-gradient(circle at center, rgba(200, 155, 60, 0.15) 0%, transparent 70%);
+}
 
-  /* Sombras refinadas */
-  .card-shadow {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  }
+@utility coin-glow-strong {
+  background: radial-gradient(circle at center, rgba(200, 155, 60, 0.25) 0%, transparent 70%);
+}
+
+@utility card-shadow {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+@utility card-shadow-elegant {
+  box-shadow:
+    0 1px 2px rgba(28, 25, 23, 0.04),
+    0 8px 24px -8px rgba(28, 25, 23, 0.08),
+    0 24px 48px -16px rgba(200, 155, 60, 0.06);
+}
+
+@utility bg-parchment {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 155, 60, 0.06), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(200, 155, 60, 0.04), transparent);
+}
+
+/* ========================================
+   DARK MODE — custom utilities override
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
   .card-shadow-elegant {
     box-shadow:
-      0 1px 2px rgba(28, 25, 23, 0.04),
-      0 8px 24px -8px rgba(28, 25, 23, 0.08),
-      0 24px 48px -16px rgba(200, 155, 60, 0.06);
-  }
-  @media (prefers-color-scheme: dark) {
-    .card-shadow-elegant {
-      box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.3),
-        0 8px 24px -8px rgba(0, 0, 0, 0.5),
-        0 24px 48px -16px rgba(200, 155, 60, 0.08);
-    }
-  }
-
-  /* Parchment: pergamino cálido con sutil radial de oro */
-  .bg-parchment {
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200, 155, 60, 0.06), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(200, 155, 60, 0.04), transparent);
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 8px 24px -8px rgba(0, 0, 0, 0.5),
+      0 24px 48px -16px rgba(200, 155, 60, 0.08);
   }
 }

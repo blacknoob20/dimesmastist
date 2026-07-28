@@ -1,23 +1,14 @@
 /* ========================================
-   VIEW TRANSITIONS — transiciones SPA
+   ROUTE TRANSITIONS — fade-in suave
    ======================================== */
 
-@view-transition {
-  navigation: auto;
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 }
 
-::view-transition-old(root) {
-  animation: fade-out 150ms ease-out;
-}
-
-::view-transition-new(root) {
-  animation: fade-in 200ms ease-in;
-}
-
-@keyframes fade-out {
-  to { opacity: 0; }
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
+.route-enter {
+  animation: route-enter 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
