@@ -12,6 +12,11 @@ build/
 .env.local
 .env.*.local
 
+# backend
+backend/tmp/
+backend/coverage.out
+backend/*.db
+
 # IDE
 .DS_Store
 .vscode/
