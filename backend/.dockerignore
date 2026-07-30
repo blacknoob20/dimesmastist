@@ -1,0 +1,6 @@
+.git
+tmp/
+tests/
+coverage.out
+*.db
+.env
