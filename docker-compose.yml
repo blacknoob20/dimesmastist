@@ -1,28 +1,70 @@
+networks:
+  net:
+
 services:
+  nginx:
+    container_name: dimes-nginx
+    image: nginx:1.27-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - '5176:80'
+    networks:
+      - net
+    depends_on:
+      backend:
+        condition: service_healthy
+      react:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:80/']
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  backend:
+    container_name: dimes-backend
+    build:
+      context: ./backend
+    env_file: ./backend/.env
+    environment:
+      - APP_PORT=8080
+      - DB_PATH=/app/tmp/dimes.db
+      - PHOTO_PROVIDER=local
+      - PHOTO_DIR=/app/tmp/photos
+    volumes:
+      - ./backend/tmp:/app/tmp
+    networks:
+      - net
+    healthcheck:
+      test: ['CMD', 'wget', '-q', '--spider', 'http://localhost:8080/api/v1/health']
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
   react:
     container_name: dimes
-    hostname: crguerrero
     image: node:alpine
-    init: true
     working_dir: /root/react
+    command: sh -c "npm i -g pnpm && pnpm install --frozen-lockfile && pnpm dev"
     environment:
       - VITE_PORT=80
       - VITE_HOST=0.0.0.0
+      - VITE_API_URL=/api/v1
       - CI=true
     volumes:
-      - $PWD/:/root/react
-      - $PWD/../.pnpm/:/root/.pnpm
+      - ./frontend:/root/react
+      - ./.pnpm-store:/root/.pnpm
     networks:
       - net
-    ports:
-      - '5176:80'
-    command: sh -c "npm install -g pnpm && pnpm dev"
     healthcheck:
-      test: [ "CMD", "node", "-e", "require('http').get('http://localhost:80', r => process.exit(r.statusCode === 200 ? 0 : 1))" ]
+      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:80', r => process.exit(r.statusCode === 200 ? 0 : 1))"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 15s
+      start_period: 30s
 
   playwright:
     image: mcr.microsoft.com/playwright:v1.51.1-jammy
@@ -35,14 +77,11 @@ services:
     command: sh -c "npm install @playwright/test@1.51.1 && npx playwright test --config /tests/playwright/playwright.config.cjs"
     environment:
       - PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-      - BASE_URL=http://react:80
+      - BASE_URL=http://nginx:80
     depends_on:
-      react:
+      nginx:
         condition: service_healthy
     networks:
       - net
     profiles:
       - test
-
-networks:
-  net:
